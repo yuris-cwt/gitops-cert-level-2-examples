@@ -2,20 +2,20 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   namespace: example06
-  generateName: disable-alerts-
+  generateName: enable-alerts-
   labels:
-    codefresh.io/cert: disable-job  
+    codefresh.io/cert: enable-job
   annotations:
-    argocd.argoproj.io/hook: PreSync
-    argocd.argoproj.io/sync-wave: "20"
+    argocd.argoproj.io/hook: PostSync
+    argocd.argoproj.io/sync-wave: "30"
 spec:
   template:
     spec:
       containers:
-      - name: dummy-run
+      - name: dummy-message
         image: alpine
         command:
           - "sleep"
-          - "10"
+          - "3"
       restartPolicy: Never
   backoffLimit: 2    
